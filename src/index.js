@@ -9,8 +9,8 @@ module.exports = function toReadable (number) {
   let readableDesyatie = ['', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
     if (number === 0) return 'zero';
     if (number < 10) return `${readableNumUntil10[number]}`;
-    if (number === 10) return readableNumUntil10[10];
-    if (number > 10 && number <20) return `${readableDesyatie[numberNum2]}`;
+    if (number === 10) return `${readableNumDozens[1]}`;
+    if (number > 10 && number <20) return (`${readableDesyatie[numberNum2]}`).trim();
     if (number >= 20 && number < 100) return `${readableNumDozens[numberNum1]} ` + `${readableNumUntil10[numberNum2]}`;
     if (number > 100 && number < 1000) {
       if (number > 120 && number < 200 || number > 220 && number < 300 || number > 320 && number < 400 || number > 420 && number < 500 
@@ -21,7 +21,7 @@ module.exports = function toReadable (number) {
       else if (number > 110 && number < 120 || number > 210 && number < 220 || number > 310 && number < 320 || number > 410 && number < 420 
         || number > 510 && number < 520 || number > 610 && number < 620 || number > 710 && number < 720 || number > 810 && number < 820 
         || number > 910 && number < 920) {
-          return `${readableNumUntil10[numberNum1]} ` + `${readableHundred[1]} ` + `${readableDesyatie[numberNum3]}`;
+          return (`${readableNumUntil10[numberNum1]} ` + `${readableHundred[1]} ` + `${readableDesyatie[numberNum3]}`).trim();
         }
       else if (number === 110 ||number === 210 || number === 310 || number === 410 || number === 510 || number === 610 || number === 710 || number === 810 || number === 910){
         return `${readableNumUntil10[numberNum1]} ` + `${readableHundred[1]} ` + `${readableNumDozens[1]}`;
@@ -30,9 +30,15 @@ module.exports = function toReadable (number) {
         return `${readableNumUntil10[numberNum1]} ` + `${readableHundred[1]} ` + `${readableNumDozens[2]}`;
       }
       else {
-        let result = `${readableNumUntil10[numberNum1]}` + `${readableHundred[1]}` + `${readableNumUntil10[numberNum3]}`;
-        return result.trim();
+        if ( numberNum3 === 0) {
+          return (`${readableNumUntil10[numberNum1]} ` + `${readableHundred[1]} ` + `${readableDesyatie[numberNum2]}`).trim();
+        } 
+        else {
+          return (`${readableNumUntil10[numberNum1]} ` + `${readableHundred[1]} ` + `${readableNumUntil10[numberNum3]}`).trim();
+        }
       }
     }
     if (number === 100 || 200 || 300 || 400 || 500 || 600 || 700 || 800 || 900) return `${readableNumUntil10[numberNum1]} ` + `${readableHundred[1]}`;
-}
+  }
+   
+
